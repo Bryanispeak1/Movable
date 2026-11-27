@@ -4,6 +4,7 @@ import {searchMovies, getPopularMovies} from "../services/api"
 import "../css/Home.css"
 
 function Home() {
+    const [selectedMovie, setSelectedMovie] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null)
@@ -45,7 +46,7 @@ function Home() {
         setSearchQuery("")
     };
 
-    return (<div className="home">
+    return <div className="home">
         <form onSubmit={handleSearch} className="search-form">
             <input type="text" placeholder="search for movies......."
              className="search-input"
@@ -63,12 +64,30 @@ function Home() {
          )  :  (   
           <div className="movies-grid">
             {movies.map ((movie) => (
-                <Moviecard movie={movie} key= {movie.id} />
+                <Moviecard movie={movie} key= {movie.id}
+                onSelect={setSelectedMovie} />
             ))}
-        </div>) }
-
-    </div>
-    ) 
+            {selectedMovie && (
+                <div className="player-modal" onClick={() => setSelectedMovie(null)}>
+                    <div className="player-content" onClick={(e) => e.stopPropagation()}>
+                        <div className="player-header">
+                            <h3>{selectedMovie.title}</h3>
+                            <button onClick={() => setSelectedMovie(null)}>X</button>
+                        </div>
+                        <iframe
+                        src={`https://bingeapi.st/embed/movie/${selectedMovie.id}`}
+                        title={selectedMovie.title}
+                        width="100%"
+                        height="500"
+                        frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowfullscreen
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    )} </div>
 }
 
 

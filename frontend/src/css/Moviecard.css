@@ -120,5 +120,9 @@
     width: 32px;
     height: 32px;
     font-size: 1.2rem;
+    right: 1rem;
   }
+}
+.watchlist-btn{
+  left: 1rem;
 }

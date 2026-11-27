@@ -1,20 +1,25 @@
 import {createContext, useState, useContext,useEffect} from "react"
 
 const MovieContext = createContext()
-
 export const useMovieContext = () => useContext(MovieContext)
 
 export const MovieProvider = ({children}) => {
-     const [Favorites, setFavorites] = useState([])
-     useEffect(() => {
-        const storedFavs = localStorage.getItem("favorites")
-        if (storedFavs) {
-            setFavorites(JSON.parse(storedFavs))
-        }
-    }, [])
+  const [favorites, setFavorites] = useState(() => {
+const storedFavs = localStorage.getItem("favorites");
+return storedFavs ? JSON.parse(storedFavs) : [];
+});
+
+const [watchlist, setWatchlist] = useState(() => {
+const stored = localStorage.getItem("watchlist");
+return stored ? JSON.parse(stored) : [];
+});
+
     useEffect(() => {
-        localStorage.setItem("favorites", JSON.stringify(Favorites))
-    }, [Favorites])
+        localStorage.setItem("favorites", JSON.stringify(favorites))
+    }, [favorites])
+    useEffect(() => {
+        localStorage.setItem("watchlist", JSON.stringify(watchlist));
+    }, [watchlist])
 
     const addToFavorites = (movie) => {
         setFavorites((prev) => {
@@ -27,16 +32,34 @@ export const MovieProvider = ({children}) => {
         setFavorites((prev) => prev.filter((movie) => movie.id !== movieId))
     }
     const isFavorite = (movieId) => {
-        return Favorites.some((movie) => movie.id === movieId)
+        return favorites.some((movie) => movie.id === movieId)
     }
-    <MovieContext.provider value={{Favorites, addToFavorites, removeFromFavorites, isFavorite}}>
+
+      const addToWatchlist = (movie) => {
+        setWatchlist((prev) => {
+            if (prev.some((item) => item.id === movie.id)) return prev;
+            return [...prev, movie];
+        });
+    };
+
+    const removeFromWatchlist =(movieId) => {
+        setWatchlist((prev) => prev.filter((movie) => movie.id !== movieId))
+    }
+    const isInWatchlist = (movieId) => {
+        return watchlist.some((movie) => movie.id === movieId)
+    }
+    <MovieContext.Provider value={{favorites, addToFavorites, removeFromFavorites, isFavorite, watchlist, addToWatchlist, removeFromWatchlist,isInWatchlist}}>
         {children}
-    </MovieContext.provider>
-    const value = {
-        Favorites,
+    </MovieContext.Provider>
+    const value ={
+        favorites,
         addToFavorites,
         removeFromFavorites,
-        isFavorite
+        isFavorite,
+        watchlist,
+        addToWatchlist,
+        removeFromWatchlist,
+        isInWatchlist,
     }
     return <MovieContext.Provider value={value}>
         {children}
