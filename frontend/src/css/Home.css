@@ -1,87 +1,184 @@
 .home {
-  padding: 2rem 0;
-  width: 100%;
-  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
 }
 
 .search-form {
-  max-width: 600px;
-  margin: 0 auto 2rem;
   display: flex;
-  gap: 1rem;
-  padding: 0 1rem;
-  box-sizing: border-box;
+  align-items: center;
+  gap: 10px;
+  max-width: 620px;
+  margin: 0 auto 28px;
+  padding: 6px 8px 6px 18px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  transition: border-color 0.2s ease;
+}
+
+.search-form:focus-within {
+  border-color: var(--accent);
 }
 
 .search-input {
   flex: 1;
-  padding: 0.75rem 1rem;
+  min-width: 0;
   border: none;
-  border-radius: 4px;
-  background-color: #333;
-  color: white;
-  font-size: 1rem;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  padding: 8px 4px;
 }
 
-.search-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #666;
+.search-input::placeholder {
+  color: var(--text-muted);
 }
 
 .search-button {
-  padding: 0.75rem 1.5rem;
-  background-color: #e50914;
-  color: white;
-  border-radius: 4px;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  white-space: nowrap;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 9px 20px;
+  background-color: var(--accent);
+  color: #061014;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .search-button:hover {
-  background-color: #f40612;
+  background-color: var(--accent-hover);
 }
 
+.loading,
+.error-message {
+  text-align: center;
+  padding: 32px 16px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+}
 
-@media (max-width: 639px) {
-  .home {
-    padding: 1rem 0;
-  }
-
-  .search-form {
-    margin-bottom: 1rem;
-  }
+.error-message {
+  color: #fda4af;
+  border-color: rgba(251, 113, 133, 0.35);
 }
 
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
-  width: 100%;
-  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 18px;
 }
-.player-modal{
+
+.player-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  z-index: 60;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
-  padding: 1rem;
+  justify-content: center;
+  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.82);
 }
+
 .player-content {
-  background: #1a1a1a;
   width: 100%;
   max-width: 900px;
-  border-radius: 10px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
-.player-header{
+
+.player-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
-  color:#fff;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.player-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.player-header button {
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 32px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.player-header button:hover {
+  background-color: var(--accent);
+  color: #061014;
+}
+
+@media (max-width: 600px) {
+  .home {
+    padding: 18px 14px 36px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+.player-content iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: 75vh;
+}
+
+@media (max-width: 640px) {
+  .home {
+    padding: 16px 12px 32px;
+  }
+
+  .search-form {
+    padding: 4px 6px 4px 14px;
+    margin-bottom: 20px;
+    gap: 6px;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+    padding: 7px 2px;
+  }
+
+  .search-button {
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    flex-shrink: 0;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .player-modal {
+    padding: 10px;
+  }
+
+  .player-header {
+    padding: 10px 12px;
+  }
+
+  .player-header h3 {
+    font-size: 0.92rem;
+  }
 }

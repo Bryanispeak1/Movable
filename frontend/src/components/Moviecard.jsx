@@ -23,9 +23,16 @@ function Moviecard({movie, onSelect}) {
       return(
        <div className="movie-card" onClick={() => onSelect(movie)}>
       <div className="movie-poster">
-        <img 
-        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
-        alt={movie.title}/>
+       <img
+  src={
+    movie.poster_path
+      ? movie.poster_path.startsWith("http")
+        ? movie.poster_path
+        : `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "https://via.placeholder.com/300x450?text=No+Image"
+  }
+  alt={movie.title}
+/>
         <div className="movie-overlay">
             <button
              className={`favorite-btn ${favorite ? "active" : ""}`}

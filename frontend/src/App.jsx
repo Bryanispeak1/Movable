@@ -5,6 +5,7 @@ import Favorites from './pages/favorites'
 import NavBar from './components/Navbar'
 import { MovieProvider } from './contexts/MovieContext'
 import Watchlist from './pages/watchlist'
+import Anime from './pages/Anime'
 function App() {
   return (
     <MovieProvider>
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<Home/>}/>
       <Route path="/favorites" element={<Favorites />}/>
       <Route path="/watchlist" element={<Watchlist/>}/>
+      <Route path="/anime" element={<Anime/>}/>
     </Routes>
    </main>
    </MovieProvider>

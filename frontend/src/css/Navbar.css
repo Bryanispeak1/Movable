@@ -1,47 +1,91 @@
 .navbar {
-  background-color: #000000;
-  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background-color: rgba(11, 14, 20, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+}
+
+.navbar-brand span {
+  color: var(--accent);
 }
 
 .navbar-links {
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.nav-link {
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
+.navbar-links a {
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.navbar-links a:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-elevated);
 }
 
-@media (max-width: 768px) {
+.navbar-links a.active {
+  color: #061014;
+  background-color: var(--accent);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
   .navbar {
-    padding: 1rem;
+    padding: 12px 16px;
+  }
+
+  .navbar-links a {
+    padding: 6px 11px;
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 640px) {
+  .navbar {
+    padding: 10px 14px;
+    gap: 10px;
   }
 
   .navbar-brand {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
+    white-space: nowrap;
   }
 
   .navbar-links {
-    gap: 1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 6px;
   }
 
-  .nav-link {
-    padding: 0.5rem;
+  .navbar-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar-links a {
+    padding: 7px 12px;
+    font-size: 0.84rem;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }
