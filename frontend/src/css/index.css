@@ -53,3 +53,46 @@ img,
 iframe {
   max-width: 100%;
 }
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-main);
+  animation: splashFadeOut 0.45s ease 0.95s forwards;
+  pointer-events: none;
+}
+
+.splash-logo {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  animation: logoPop 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.splash-logo span {
+  color: var(--accent);
+}
+
+@keyframes logoPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+    letter-spacing: 4px;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    letter-spacing: 1px;
+  }
+}
+
+@keyframes splashFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

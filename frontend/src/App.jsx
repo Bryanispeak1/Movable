@@ -6,9 +6,33 @@ import NavBar from './components/Navbar'
 import { MovieProvider } from './contexts/MovieContext'
 import Watchlist from './pages/watchlist'
 import Anime from './pages/Anime'
+import { useState, useEffect } from "react";
+
+// Inside your App component, right before return:
+
 function App() {
+  const [showSplash, setShowSplash] = useState(
+  () => !sessionStorage.getItem("hasSeenIntro")
+);
+
+useEffect(() => {
+  if (!showSplash) return;
+  const timer = setTimeout(() => {
+    setShowSplash(false);
+    sessionStorage.setItem("hasSeenIntro", "true");
+  }, 1400);
+  return () => clearTimeout(timer);
+}, [showSplash]);
+
   return (
     <MovieProvider>
+      {showSplash && (
+  <div className="splash-screen">
+    <h1 className="splash-logo">
+      Cine<span>Pulse</span>
+    </h1>
+  </div>
+)}
       <NavBar/>
    <main className="main-content">
     <Routes>

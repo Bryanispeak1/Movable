@@ -182,3 +182,48 @@
     font-size: 0.92rem;
   }
 }
+/* Desktop layout */
+@media (min-width: 641px) {
+  .home {
+    max-width: 1360px;
+    padding: 28px 32px 56px;
+  }
+
+  .search-form {
+    max-width: 680px;
+    margin: 0 auto 32px;
+    padding: 7px 8px 7px 20px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    gap: 22px;
+  }
+
+  .player-content {
+    max-width: 960px;
+  }
+}
+@media (min-width: 641px) {
+  .home {
+    max-width: 1440px;
+    padding: 24px 28px 56px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+@media (min-width: 641px) {
+  .home {
+    max-width: 1520px;
+    padding: 32px 40px 64px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 24px;
+    row-gap: 28px;
+  }
+}

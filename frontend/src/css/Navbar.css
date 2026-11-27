@@ -89,3 +89,16 @@
     flex-shrink: 0;
   }
 }
+@media (min-width: 641px) {
+  .navbar {
+    padding: 14px 32px;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .navbar-links {
+    gap: 10px;
+  }
+}
